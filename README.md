@@ -1,1 +1,1 @@
-#Simple timer with javascript
+##Simple timer with javascript
