@@ -34,6 +34,12 @@
     body{
       background-color: blueviolet;
     }
+
+    #watch div{
+      margin-top: 5px;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -41,6 +47,11 @@
     <span>00:00:00</span>
     <br>
     <button>Start</button>
+    <br>
+    <div>
+      <input type="checkbox" value="1">
+        Notify every 30 minutes
+    </div>    
   </div>
   
 
@@ -48,7 +59,12 @@
 
     const btn = document.querySelector('button');
     const time = document.querySelector('span');
+    const check = document.querySelector('input');
 
+    const sound = new Audio('MLG_HORNS.mp3');
+
+    let nofity = false;
+    let played = false;
     let btnAction = 1;
     let seconds = 0;
     let minutes = 0;
@@ -67,8 +83,13 @@
       }
     });
 
+    check.addEventListener('click', () => {
+      nofity = check.checked;
+      
+    });
+
     function updateTime(){
-      if(seconds === 59){
+      if(seconds === 5){
         minutes++;
         seconds = 0;
       }else{
@@ -78,6 +99,13 @@
       if(minutes === 59){
         hours++;
         minutes = 0;
+      }else if((minutes === 30 || minutes === 59) && nofity && !played){
+        try{
+          sound.play();
+          played = true;
+        }catch(e){
+          console.error('Unable to play sound >> ',e);
+        }
       }
 
       let m = addLeadingZero(minutes);
