@@ -64,7 +64,6 @@
     const sound = new Audio('MLG_HORNS.mp3');
 
     let nofity = false;
-    let played = false;
     let btnAction = 1;
     let seconds = 0;
     let minutes = 0;
@@ -99,13 +98,8 @@
       if(minutes === 59){
         hours++;
         minutes = 0;
-      }else if((minutes === 30 || minutes === 59) && nofity && !played){
-        try{
-          sound.play();
-          played = true;
-        }catch(e){
-          console.error('Unable to play sound >> ',e);
-        }
+      }else if((minutes === 30 || minutes === 59) && seconds === 0 && nofity){
+        playSound();
       }
 
       let m = addLeadingZero(minutes);
@@ -123,6 +117,14 @@
 
     function addLeadingZero(value){
       return String(value).length === 1 ? '0'+value : value;
+    }
+
+    function playSound(){
+      try{
+        sound.play();
+      }catch(e){
+        console.error('Unable to play sound >> ',e);
+      }      
     }
   </script>
 </body>
