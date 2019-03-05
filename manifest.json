@@ -1,0 +1,14 @@
+{
+  "short_name": "Timer",
+  "name": "Simple timer",
+  "background_color": "#2196F3",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "t.png",
+      "type": "image/png",
+      "sizes": "87x93"
+    }
+  ],
+  "start_url": "/?utm_source=homescreen"
+}
